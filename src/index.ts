@@ -1,16 +1,11 @@
-import { User } from './models/User';
+import { User, UserProps } from './models/User';
+import axios, { AxiosResponse } from 'axios';
+import { Collection } from './models/Collection';
 
-// ***************************************************************
-// const user = new User({ id: 1 });
-// console.log(user);  // ? why not is just { id: 1 }
-// user.fetch();
-// ***************************************************************
+const collection = User.buildUserCollection();
 
-const user = new User({ name: 'James', age: 0 });
-// user.set({ name: 'Jess', age: 20 });
-// user.save();
-user.events.on('change', () => {
-  console.log('change!');
-});
+collection.on('change', () => {
+  console.log(collection);
+})
 
-user.events.trigger('change');
+collection.fetch();
